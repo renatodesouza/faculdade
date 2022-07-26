@@ -1,8 +1,10 @@
+from dataclasses import fields
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import UserCreationForm, UserChangeForm
 
 from .models.my_user_admin import MyUserAdmin
+from .models.aluno import Aluno
 
 
 
@@ -12,7 +14,7 @@ class CustomUsuarioAdmin(UserAdmin):
     form = UserChangeForm
     model = MyUserAdmin
 
-    fields_set = (
+    fieldsset = (
         (None,                          {'fields': ('email', 'password')}),
         ('Informações Pessoais',        {'fields': ('first_name', 'last_name', 'dt_expiracao')}),
         ('Permissões',                  {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permission')}),
@@ -23,3 +25,15 @@ class CustomUsuarioAdmin(UserAdmin):
 
     def usuario(self, instance):
         return f'{instance.usuario.get_full_name}'
+
+@admin.register(Aluno)
+class AlunoAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Dados de usuario',                {'fields': ('usuario', 'ra', 'imagem')}),
+        ('Contato',                         {'fields': ('celular',)}),
+    ]
+
+    list_display = ('id', 'usuario', 'celular', 'ra', 'imagem')
+
+    def usuario(self, instance):
+        return f'{instance.usuario.get_ful_name}'
