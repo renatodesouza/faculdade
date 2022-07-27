@@ -5,6 +5,7 @@ from .forms import UserCreationForm, UserChangeForm
 
 from .models.my_user_admin import MyUserAdmin
 from .models.aluno import Aluno
+from .models.professor import Professor
 
 
 
@@ -37,3 +38,16 @@ class AlunoAdmin(admin.ModelAdmin):
 
     def usuario(self, instance):
         return f'{instance.usuario.get_ful_name}'
+
+
+@admin.register(Professor)
+class ProfessorAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Dados de usuário',                {'fields':('usuario', 'rp', 'imagem')}),
+        ('Contato',                         {'fields': ('celular',)})
+    ]
+
+    list_display = ('usuario', 'celular', 'rp', 'imagem')
+
+    def usuario(self, instance):
+        return f'{instance.usuario.get_full_name}'
