@@ -1,0 +1,74 @@
+body {
+    overflow-x: hidden;
+}
+
+.imagem {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container-box {
+    background-color: #FFD93B;
+    color: black;
+    border: none;
+    margin: 0px;
+    padding: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+}
+
+.logo-glyph {
+    width: 20px;
+    height: 20px;
+}
+
+.info {
+    color: #FFD93B;
+}
+
+.info h5 {
+    border: .5px solid #FFD93B;
+    margin: 0px;
+    padding: 10px;
+    
+}
+
+.info ul li {
+    list-style-type: none;
+}
+
+.info ul li a {
+    text-decoration: none;
+    color: #FFD93B;
+    text-align: justify;
+    border: 1px solid red;
+}
+
+.box {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-column: 1 / -1;
+    place-self: center;
+}
+
+.grid {
+    margin: 0px;
+    padding: 0px 5px;
+    grid-template-rows: 40px;
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.painel {
+    background-color: #FFD93B;
+    border-radius: 4px;
+    color: black;
+    text-align: inherit;
+    
+}
+
