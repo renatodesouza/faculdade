@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
+from .models import curso
 
-# Create your views here.
+
+
+class IndexView(TemplateView):
+    template_name = 'app_fac/home.html'
