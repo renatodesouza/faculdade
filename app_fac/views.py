@@ -6,3 +6,6 @@ from .models import curso
 
 class IndexView(TemplateView):
     template_name = 'app_fac/home.html'
+
+class TestView(TemplateView):
+    template_name = 'app_fac/teste.html'
