@@ -126,6 +126,10 @@ footer div a:hover {
     border: none;
 }
 
+/* .sombra-img {
+    box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.2), 0 66px 20px 0 rgba(0, 0, 0, 0.19);
+} */
+
 .block {
     display: inline-block;
     position: relative;
@@ -154,3 +158,6 @@ footer div a:hover {
     font-size: 31px;
     background-color: #f7b80ec5;
 }
+
+/* ESTILO PARA LOGIN */
+
