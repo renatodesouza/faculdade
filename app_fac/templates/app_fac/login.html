@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static '/css/my_style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Login</title>
+</head>
+<body>
+    <div class="grid">
+        <div class="lat-left">
+        </div>
+        <div class="lat-right">
+            <div class="center-form">
+                <div class="form-login">
+                    <form class="grid-form" action="">
+                        <div>
+                            <label for="">User name</label>
+                            <input type="text" name="user" placeholder="Usuario">
+                        </div>
+                    
+                        <div>
+                            <label for="">Senha</label>
+                            <input type="password" name="password" id="">
+                        </div>
+                        
+                        <div>
+                            <input type="checkbox" name="lembrar" id="">
+                            <label for="">Remember me</label>
+                            <a href="http://">For got Password</a>
+                        </div>
+                        
+                        <a class="bottom" href="">Login</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body> 
+</html>
