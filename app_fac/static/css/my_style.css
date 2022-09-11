@@ -9,7 +9,7 @@
 }
 
 body {
-    background: linear-gradient(45deg, #FFD93B, #ffc13b);
+    background: linear-gradient(30deg, #FFD93B, #ffee00);
     background-repeat: no-repeat;
     min-height: 100vh;
     min-width: 100vw;
@@ -123,6 +123,16 @@ form input[type="submit"] {
     transition: all 0.3s ease;
 }
 
+.reset {
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: 1px solid #FFD93B;
+    color: black;
+    background-color: #FFD93B;
+    text-align: center;
+    text-decoration: none;
+}
+
 form input[type="submit"]:hover {
     letter-spacing: 0.5px;
     background: linear-gradient(to right, #FFD93B, #ffc13b);
@@ -165,4 +175,22 @@ form input[type="submit"]:hover {
 
 .footer .social-field.facebook {
     background: linear-gradient(to right, #1e3c72, #2a5298);
+}
+
+/* Estilo btn home */
+
+.btn-home {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px;
+    
+}
+
+.btn {
+    background-color: black;
+    color: #FFD93B;
+    align-self: center;
+    padding: 15px;
+    
+    grid-row: 2;font-size: large;
 }

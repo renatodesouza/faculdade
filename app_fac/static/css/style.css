@@ -1,7 +1,11 @@
 body {
     overflow-x: hidden;
+    
 }
 
+.img-cursos {
+    border-radius: 7px;
+}
 
 .imagem {
     width: 100%;
