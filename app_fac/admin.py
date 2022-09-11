@@ -1,3 +1,4 @@
+from atexit import register
 from django.contrib.auth.admin import UserAdmin
 from django.contrib import admin
 from django.forms import fields 
@@ -18,6 +19,7 @@ from .models.mensagem import Mensagem
 from .models.solicitacao_matricula import SolicitacaoMatricula
 from .models.matricula import Matricula
 from .models.photo import Photo
+from .models.exemplo import Person, Group
 
 @admin.register(MyUserAdmin)
 class CustomUsuarioAdmin(UserAdmin):
@@ -60,7 +62,7 @@ class AlunoAdmin(admin.ModelAdmin):
         ('Contato',                     {'fields':('celular',)}),
     ]
 
-    list_display = ('id', 'usuario', 'celular', 'ra', 'usuario', 'imagem')
+    list_display = ('id', 'usuario', 'celular', 'ra', 'imagem')
 
     def usuario(self, instance):
         return f'{instance.usuario.get_full_name}'
@@ -91,16 +93,19 @@ class TurmaAdmin(admin.ModelAdmin):
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
     fieldsets = [
-    ('Informações do Curso',            {'fields':('nome', 'destaque', 'descricao', 'mercado_trabalho')}),
+    ('Informações do Curso',            {'fields':('nome', 'destaque', 'descricao', 'mercado_trabalho',
+                                        'periodo', 'duracao', 'modalidade')}),
     ('Coordenador responsavel',         {'fields':['coordenador']}),
-    ('Midia',                           {'fields':('imagem', 'imagem2')}),
+    ('Midia',                           {'fields':('imagem', 'imagem2', 'imagem3')}),
     ]
 
     #Adiociona uma caixa de pesquisa no topo da lista
     search_fields = ['nome']
 
     #Adiciona os campos como colunas
-    list_display = ('nome', 'destaque', 'descricao', 'mercado_trabalho', 'coordenador', 'imagem', 'imagem2')
+    list_display = ('nome', 'destaque', 'descricao', 'mercado_trabalho', 
+                    'periodo', 'duracao', 'modalidade',
+                    'coordenador', 'imagem', 'imagem2', 'imagem3')
 
     #inlines = [TurmaInline]
 
@@ -109,9 +114,10 @@ class DisciplinaOfertadaAdmin(admin.StackedInline):
     extra = 1
 
     fieldsets = [
-        ('Responsaveis',        {'fields':('professor', 'coordenador', 'curso')}),
+        ('Responsaveis',        {'fields':('professor', 'curso')}),
         ('Data',                {'fields':('dt_inicio', 'dt_fim', 'ano', 'semestre')}),
-        ('Detalhes',            {'fields':('metodologia', 'recursos', 'criterio_avaliacao', 'plano_aula', 'turma', 'disciplina')}),
+        ('Detalhes',            {'fields':('metodologia', 'recursos', 'criterio_avaliacao', 
+                                            'plano_aula', 'turma', 'disciplina')}),
     
     ]
 
@@ -119,9 +125,11 @@ class DisciplinaOfertadaAdmin(admin.StackedInline):
 class DisciplinaAdmin(admin.ModelAdmin):
     fieldsets = [
     ('Titulo',              {'fields':['nome']}),
-    ('Detalhes',            {'fields':('status', 'data', 'carga_horaria', 'plano_ensino', 'competencias', 'habilidades', 'ementa', 'Conteudo_programatico')}),
+    ('Detalhes',            {'fields':('status', 'data', 'carga_horaria', 'plano_ensino', 
+                                        'competencias', 'habilidades', 'ementa', 'Conteudo_programatico')}),
     (None,                  {'fields':['bibliografia_basica']}),
     (None,                  {'fields':['bibliografia_complementar']}),
+    # (None,                  {'fields':['coordenador']}),
     (None,                  {'fields':['percentual_pratico']}),
     (None,                  {'fields':['percentual_teorico']}),
     ]
@@ -129,22 +137,24 @@ class DisciplinaAdmin(admin.ModelAdmin):
     search_fields = ['nome']
 
     list_display = ('nome', 'data', 'status', 'plano_ensino', 'carga_horaria', 'competencias',
-    'habilidades', 'ementa', 'Conteudo_programatico', 'bibliografia_basica', 'bibliografia_complementar',
+    'habilidades', 'ementa', 'Conteudo_programatico', 'bibliografia_basica',
+    'bibliografia_complementar',
     'percentual_pratico', 'percentual_teorico')
 
     inlines = [DisciplinaOfertadaAdmin]
 
-# @admin.register(DisciplinaOfertada)
-# class DisciplinaOfertadaAdmin(admin.ModelAdmin):
-#     fieldsets = [
-#     ('Data',                {'fields':('dt_inicio', 'dt_fim', 'ano', 'semestre')}),
-#     ('Detalhes',            {'fields':('metodologia', 'recursos', 'criterio_avaliacao', 'plano_aula', 'turma', 'disciplina')}),
-#     ('Responsaveis',        {'fields':('professor', 'coordenador', 'curso')}),
-#     ]
+@admin.register(DisciplinaOfertada)
+class DisciplinaOfertadaAdmin(admin.ModelAdmin):
+    fieldsets = [
+    ('Data',                {'fields':('dt_inicio', 'dt_fim', 'ano', 'semestre')}),
+    ('Detalhes',            {'fields':('metodologia', 'recursos', 'criterio_avaliacao', 'plano_aula', 'turma', 'disciplina')}),
+    ('Responsaveis',        {'fields':('professor', 'curso')}),
+    ]
 
-#     search_fields = ['disciplina']
+    search_fields = ['disciplina']
 
-#     list_display = ('disciplina', 'coordenador', 'professor', 'curso', 'semestre', 'turma', 'dt_inicio', 'dt_fim', 'ano')
+    list_display = ('id', 'disciplina', 'professor', 'curso',
+    'semestre', 'turma', 'dt_inicio', 'dt_fim', 'ano')
 
 class AtividadeVinculadaAdmin(admin.TabularInline):
     model = AtividadeVinculada
@@ -164,21 +174,21 @@ class AtividadeAdmin(admin.ModelAdmin):
 
     list_display_links = ('titulo',)
 
-    inlines = [AtividadeVinculadaAdmin]
+    # inlines = [AtividadeVinculadaAdmin]
 
-# @admin.register(AtividadeVinculada)
-# class AtividadeVinculadaAdmin(admin.ModelAdmin):
-#     fieldsets = [
-#         ('Disciplina',          {'fields':('disciplina_ofertada',)}),
-#         ('Professor',           {'fields':('professor',)}),
-#         ('Detalhes',            {'fields':('rotulo', 'status', 'atividade')}),
-#         ('Entrega',             {'fields':('dt_inicio', 'dt_fim')}),
+@admin.register(AtividadeVinculada)
+class AtividadeVinculadaAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Detalhes',            {'fields':('atividade', 'rotulo', 'status' )}),
+        ('Disciplina',          {'fields':('disciplina_ofertada',)}),
+        ('Professor',           {'fields':('professor',)}),
+        ('Entrega',             {'fields':('dt_inicio', 'dt_fim')}),
         
-#     ]
+    ]
 
-#     search_fields = ['status']
+    search_fields = ['status']
 
-#     list_display = ('status', 'rotulo', 'dt_inicio', 'dt_fim', 'atividade', 'professor', 'disciplina_ofertada')
+    list_display = ('status', 'rotulo', 'dt_inicio', 'dt_fim', 'atividade', 'professor', 'disciplina_ofertada')
 
 @admin.register(EntregaAtividade)
 class EntregaAtividadeAdim(admin.ModelAdmin):
@@ -213,9 +223,9 @@ class MensagemAdmin(admin.ModelAdmin):
     list_display = ('assunto', 'referencia', 'conteudo', 'status', \
          'dt_envio', 'dt_resposta', 'resposta', 'aluno', 'professor')
 
-class MatriculaAdmin(admin.TabularInline):
-    model = Matricula
-    extra = 1
+# class MatriculaAdmin(admin.TabularInline):
+#     model = Matricula
+#     extra = 1
 
 
 @admin.register(SolicitacaoMatricula)
@@ -232,7 +242,7 @@ class SolicitacaoMatriculaAdmin(admin.ModelAdmin):
 
     list_display = ('dt_solicitacao', 'status', 'aluno', 'curso', 'coordenador')
 
-    inlines = [MatriculaAdmin]
+    # inlines = [MatriculaAdmin]
 
 
 
@@ -243,18 +253,40 @@ class PhotoAdmin(admin.ModelAdmin):
         ('Usuario',             {'fields':['usuario']})
     ]
 
-# @admin.register(Matricula)
-# class Matricula(admin.ModelAdmin):
-#     fieldsets = [
-#         ('Solicitacao',             {'fields':['solicitacao']}),
-#         ('Aluno',                   {'fields':['aluno']}),
-#         ('Curso',                   {'fields':['curso']}),
-#         ('Turma',                   {'fields':['turma']}),
-#         ('Status',                  {'fields':['status']}),
-#         ('Data inicio',             {'fields':['dt_inicio']}),
-#         ('Data fim',                {'fields':['dt_fim']}),
-#     ]
+@admin.register(Matricula)
+class Matricula(admin.ModelAdmin):
+    fieldsets = [
+        ('Solicitacao',             {'fields':['solicitacao_matricula']}),
+        ('Aluno',                   {'fields':['aluno']}),
+        ('Curso',                   {'fields':['curso']}),
+        ('Turma',                   {'fields':['turma']}),
+        ('Status',                  {'fields':['status']}),
+        ('Data inicio',             {'fields':['dt_inicio']}),
+        ('Data fim',                {'fields':['dt_fim']}),
+    ]
 
-#     search_fields = ['dt_solicitacao', 'aluno']
+    search_fields = ['dt_solicitacao', 'aluno']
 
-#     list_display = ('dt_inicio', 'dt_fim', 'status', 'aluno', 'curso', 'turma')
+    list_display = ('dt_inicio', 'dt_fim', 'status', 'aluno', 'curso', 'turma', 'solicitacao_matricula')
+
+
+
+    # ----------------------------------------------------------------------------------
+
+
+
+class MembershipInline(admin.TabularInline):
+    model = Group.members.through
+
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    inlines = [
+        MembershipInline,
+    ]
+
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
+    inlines = [
+        MembershipInline,
+    ]
+    exclude = ('members',)

@@ -2,6 +2,7 @@ from django.db import models
 from .aluno import Aluno
 from .coordenador import Coordenador
 from .curso import Curso
+from .disciplina_ofertada import DisciplinaOfertada
 
 
 
@@ -21,7 +22,7 @@ class SolicitacaoMatricula(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.PROTECT)
     curso = models.ForeignKey(Curso, on_delete=models.PROTECT, default=None)
     coordenador = models.ForeignKey(Coordenador, on_delete=models.PROTECT)
-    #disciplinaofertada = models.ForeignKey(DisciplinaOfertada, on_delete=models.PROTECT)
+    #disciplinaofertada = models.ForeignKey(DisciplinaOfertada, on_delete=models.PROTECT, default=1)
     
     class Meta:
         verbose_name_plural = 'Solicitação de Matricula'

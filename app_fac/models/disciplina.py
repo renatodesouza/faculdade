@@ -1,6 +1,7 @@
 from django.db import models
-from .my_user_admin import MyUserAdmin
-from stdimage import StdImageField, JPEGField
+
+from app_fac.models.coordenador import Coordenador
+
 
 
 class Disciplina(models.Model):
@@ -20,6 +21,7 @@ class Disciplina(models.Model):
     Conteudo_programatico = models.TextField(max_length=5000)
     bibliografia_basica = models.TextField(max_length=1000)
     bibliografia_complementar = models.TextField(max_length=1000)
+    # coordenador = models.ForeignKey(Coordenador, on_delete=models.PROTECT, default=1)
     percentual_pratico = models.DecimalField(max_digits=13, decimal_places=2)
     percentual_teorico = models.DecimalField(max_digits=13, decimal_places=2)
 

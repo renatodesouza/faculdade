@@ -12,8 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Home</title>
 </head>
-<body style="overflow-x: hidden; margin: 0px; width: 100%; background-color: black;">
-    
+<body style="margin: 0px; width: 100%; background-color: black;">
   <nav class="navbar navbar-inverse" style="margin: 0px;">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -22,7 +21,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>                        
         </button>
-        <a class="navbar-brand" style="color: #FFD93B; font-style: italic;" href="#">Faculdade</a>
+        <a class="navbar-brand" style="color: #FFD93B; font-style: italic;" href="{% url 'app_fac:home' %}">Faculdade</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
@@ -30,7 +29,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Graduação<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              {% for curso in curso_list %}
+              {% for curso in cursos %}
               <li><a href="{% url 'app_fac:curso' curso.id %}">{{ curso.nome }}</a></li>
               {% endfor %}
             </ul>
@@ -54,6 +53,7 @@
       </div>
     </div>
   </nav>
+  
       
   <!-- JUMBOTRON INICIO -->
   <div class="" style="margin: 0px;">
@@ -62,12 +62,12 @@
   <!-- JUMBOTRON FIM -->
   <hr>
 
-  <div class="grid">
+  <div class="container">
     <h2 class="cursos">Conheça nossos cursos</h2>
       <div class="caixa">
         {% for curso in img1 %}
         <div class="block">
-            <img class="imag" src="{{ curso.imagem2.thumbnail.url }}" alt="">
+            <img class="img-cursos" src="{{ curso.imagem2.thumbnail.url }}" alt="">
             <figcaption class="caixa-fig">{{ curso }}</figcaption>
         </div>
         {% endfor %}
