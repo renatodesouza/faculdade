@@ -166,13 +166,18 @@ class AtividadeAdmin(admin.ModelAdmin):
         ('Titulo',              {'fields':('titulo',)}),
         ('Professor',           {'fields':['professor']}),
         ('Detalhes',            {'fields':('descricao', 'conteudo', 'tipo', 'extras')}),
+        ('Status',              {'fields':('publicada',)})
     ]
 
     search_fields = ['titulo']
 
-    list_display = ('titulo', 'descricao', 'conteudo', 'tipo', 'extras', 'professor')
+    list_display = ('titulo', 'descricao', 'conteudo', 'tipo', 'extras', 'professor', 'publicada')
 
     list_display_links = ('titulo',)
+
+    list_editable = ('publicada',)
+
+    list_per_page = 7
 
     # inlines = [AtividadeVinculadaAdmin]
 
