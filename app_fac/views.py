@@ -4,9 +4,9 @@ from multiprocessing import context
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
-from app_fac.models.disciplina_ofertada import DisciplinaOfertada
+from app.models.disciplina_ofertada import DisciplinaOfertada
 
-from app_fac.models.my_user_admin import MyUserAdmin
+from app.models.my_user_admin import MyUserAdmin
 from .models.curso import Curso
 from .models.aluno import Aluno
 from .models.matricula import Matricula
@@ -17,7 +17,7 @@ from .models.atividade_vinculada import AtividadeVinculada
 class IndexView(ListView):
     model = Curso
     context_object_name = 'curso_list'
-    template_name = 'app_fac/home.html'
+    template_name = 'app/home.html'
 
     def get_queryset(self):
         return Curso.objects.all()
@@ -31,7 +31,7 @@ class IndexView(ListView):
 class CursoDetailView(DetailView):
     model = Curso
     context_object_name = 'curso_list'
-    template_name = 'app_fac/curso.html'
+    template_name = 'app/curso.html'
 
     def get_queryset(self):
         self.nome = get_object_or_404(Curso, pk=self.kwargs['pk'])
@@ -46,15 +46,15 @@ class CursoDetailView(DetailView):
         return context
 
 class LoginView(TemplateView):
-    template_name = 'app_fac/login.html'
+    template_name = 'app/login.html'
 
 class AlunoView(TemplateView):
-    template_name = 'app_fac.aluno.html'
+    template_name = 'app.aluno.html'
 
 class AlunoDetailView(DetailView):
     model = Aluno
     context_object_name = 'aluno_list'
-    template_name = 'app_fac/aluno.html'
+    template_name = 'app/aluno.html'
 
     def get_queryset(self):
         self.user = get_object_or_404(MyUserAdmin, pk=self.kwargs['pk'])
@@ -73,4 +73,4 @@ class AlunoDetailView(DetailView):
         return context
 
 class ExtView(TemplateView):
-    template_name = 'app_fac.exte.html'
+    template_name = 'app.exte.html'

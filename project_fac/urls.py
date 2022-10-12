@@ -1,4 +1,4 @@
-"""project_fac URL Configuration
+"""setup URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -19,11 +19,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from project_fac.settings import MEDIA_ROOT
+from setup.settings import MEDIA_ROOT
 
 
 urlpatterns = [
-    path('', include('app_fac.urls')),
+    path('', include('app.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     #static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

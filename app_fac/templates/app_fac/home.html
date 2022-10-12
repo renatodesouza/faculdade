@@ -21,7 +21,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>                        
         </button>
-        <a class="navbar-brand" style="color: #FFD93B; font-style: italic;" href="{% url 'app_fac:home' %}">Faculdade</a>
+        <a class="navbar-brand" style="color: #FFD93B; font-style: italic;" href="{% url 'app:home' %}">Faculdade</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
@@ -30,7 +30,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Graduação<span class="caret"></span></a>
             <ul class="dropdown-menu">
               {% for curso in cursos %}
-              <li><a href="{% url 'app_fac:curso' curso.id %}">{{ curso.nome }}</a></li>
+              <li><a href="{% url 'app:curso' curso.id %}">{{ curso.nome }}</a></li>
               {% endfor %}
             </ul>
           </li>
@@ -48,7 +48,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Matricule-se</a></li>
-          <li><a href="{% url 'app_fac:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li><a href="{% url 'app:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
       </div>
     </div>

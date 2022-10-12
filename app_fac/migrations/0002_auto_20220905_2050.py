@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_fac', '0001_initial'),
+        ('app', '0001_initial'),
     ]
 
     operations = [
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='curso',
             name='disciplina_ofertada',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='app_fac.disciplinaofertada'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='app.disciplinaofertada'),
         ),
         migrations.AlterUniqueTogether(
             name='disciplinaofertada',
