@@ -1,6 +1,6 @@
 from django.db import models
 
-from app_fac.models.coordenador import Coordenador
+from app.models.coordenador import Coordenador
 
 
 

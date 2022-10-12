@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_fac', '0004_auto_20220905_2121'),
+        ('app', '0004_auto_20220905_2121'),
     ]
 
     operations = [
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='disciplinaofertada',
             name='curso',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='app_fac.curso'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='app.curso'),
             preserve_default=False,
         ),
     ]

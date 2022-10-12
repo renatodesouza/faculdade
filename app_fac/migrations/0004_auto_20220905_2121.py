@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_fac', '0003_group_person'),
+        ('app', '0003_group_person'),
     ]
 
     operations = [
@@ -21,6 +21,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='curso',
             name='disciplina_ofertada',
-            field=models.ManyToManyField(related_name='groups', to='app_fac.DisciplinaOfertada'),
+            field=models.ManyToManyField(related_name='groups', to='app.DisciplinaOfertada'),
         ),
     ]
