@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from .professor import Professor
 
@@ -10,6 +11,7 @@ class Atividade(models.Model):
     conteudo = models.TextField(max_length=255)
     tipo = models.TextField(max_length=255)
     extras = models.TextField(max_length=255)
+    publicada = models.BooleanField(default=False)
     professor = models.ForeignKey(Professor, on_delete=models.PROTECT)
 
     class Meta:
